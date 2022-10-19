@@ -7,7 +7,7 @@ import subprocess
 # Copied into bootstrap/bootstrap.py. Make sure these two copies are exactly the same!
 import pluggy
 
-from jhub import hooks
+from jet import hooks
 
 
 # This function is needed also by the bootstrap script that starts this
