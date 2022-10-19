@@ -419,12 +419,12 @@ def main():
     jet_install_cmd.append(
         os.environ.get(
             "JET_BOOTSTRAP_PIP_SPEC",
-            "git+https://github.com/jupyterhub/the-littlest-jupyterhub.git@{}".format(
+            "git+https://github.com/jbsparks/jet.git@{}".format(
                 version
             ),
         )
     )
-    # Why checkout the code again, just copy the code ...
+    # Why checkout the code again, just copy the code ?
     if initial_setup:
         logger.info("Installing JET installer...")
     else:
@@ -433,7 +433,7 @@ def main():
 
     # Run JET installer
     logger.info("Running JET installer...")
-    os.execv(python_bin, [python_bin, "-m", "tljh.installer"] + jet_installer_flags)
+    os.execv(python_bin, [python_bin, "-m", "jet.installer"] + jet_installer_flags)
 
 
 if __name__ == "__main__":
