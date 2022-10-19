@@ -8,9 +8,9 @@ from pytest import fixture
 @fixture
 def preserve_config(request):
     """Fixture to save and restore config around tests"""
-    # Import TLJH only when needed. This lets us run tests in places
-    # where TLJH is not installed - particularly, the 'distro check' test.
-    from tljh.config import CONFIG_FILE, reload_component
+    # Import JET only when needed. This lets us run tests in places
+    # where JET is not installed - particularly, the 'distro check' test.
+    from jet.config import CONFIG_FILE, reload_component
 
     if os.path.exists(CONFIG_FILE):
         with open(CONFIG_FILE) as f:

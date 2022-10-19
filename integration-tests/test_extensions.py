@@ -7,7 +7,7 @@ def test_serverextensions():
     """
     # jupyter-serverextension writes to stdout and stderr weirdly
     proc = subprocess.run(
-        ["/opt/tljh/user/bin/jupyter-serverextension", "list", "--sys-prefix"],
+        ["/opt/jet/user/bin/jupyter-serverextension", "list", "--sys-prefix"],
         stderr=subprocess.PIPE,
     )
 
@@ -28,7 +28,7 @@ def test_nbextensions():
     """
     # jupyter-nbextension writes to stdout and stderr weirdly
     proc = subprocess.run(
-        ["/opt/tljh/user/bin/jupyter-nbextension", "list", "--sys-prefix"],
+        ["/opt/jet/user/bin/jupyter-nbextension", "list", "--sys-prefix"],
         stderr=subprocess.PIPE,
         stdout=subprocess.PIPE,
     )

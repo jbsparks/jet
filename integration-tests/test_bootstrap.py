@@ -43,11 +43,11 @@ def get_bootstrap_script_location(container_name, show_progress_page):
 #        parameters
 #
 # - param: container_apt_packages
-# - param: bootstrap_tljh_source
-#   - local: copies local tljh repo to container and configures bootstrap to
-#            install tljh from copied repo
-#   - github: configures bootstrap to install tljh from the official github repo
-#   - <pip spec>: configures bootstrap to install tljh from any given remote location
+# - param: bootstrap_jet_source
+#   - local: copies local jet repo to container and configures bootstrap to
+#            install jet from copied repo
+#   - github: configures bootstrap to install jet from the official github repo
+#   - <pip spec>: configures bootstrap to install jet from any given remote location
 # - param: bootstrap_flags
 #
 # FIXME: Consider stripping logic in this file to only testing if the bootstrap
@@ -72,11 +72,11 @@ def run_bootstrap_after_preparing_container(
         B) full test (--show-progress-page=true)
         - Copies ./ folder content to the container /srv/src
         - Runs copied bootstrap/bootstrap.py with environment variables
-            - TLJH_BOOTSTRAP_DEV=yes
-              This makes --editable be used when installing the tljh package
-            - TLJH_BOOTSTRAP_PIP_SPEC=/srv/src
-              This makes us install tljh from the given location instead of from
-              github.com/jupyterhub/the-littlest-jupyterhub
+            - JET_BOOTSTRAP_DEV=yes
+              This makes --editable be used when installing the jet package
+            - JET_BOOTSTRAP_PIP_SPEC=/srv/src
+              This makes us install jet from the given location instead of from
+              github.com/jbsparks/jet
     """
     # stop container if it is already running
     subprocess.run(["docker", "rm", "-f", container_name])
@@ -86,7 +86,6 @@ def run_bootstrap_after_preparing_container(
         [
             "docker",
             "run",
-            "--env=DEBIAN_FRONTEND=noninteractive",
             "--detach",
             f"--name={container_name}",
             image,
@@ -103,7 +102,7 @@ def run_bootstrap_after_preparing_container(
     exec_flags = ["-i", container_name, "python3", bootstrap_script]
     if show_progress_page:
         exec_flags = (
-            ["-e", "TLJH_BOOTSTRAP_DEV=yes", "-e", "TLJH_BOOTSTRAP_PIP_SPEC=/srv/src"]
+            ["-e", "JET_BOOTSTRAP_DEV=yes", "-e", "JET_BOOTSTRAP_PIP_SPEC=/srv/src"]
             + exec_flags
             + ["--show-progress-page"]
         )
@@ -131,7 +130,7 @@ def test_inside_no_systemd_docker():
         "plain-docker-test",
         f"ubuntu:{os.getenv('UBUNTU_VERSION', '20.04')}",
     )
-    assert "Systemd is required to run TLJH" in output.stdout
+    assert "Systemd is required to run JET" in output.stdout
     assert output.returncode == 1
 
 
@@ -173,7 +172,7 @@ def test_progress_page():
         started = verify_progress_page(expected_status_code=200, timeout=120)
         assert started
 
-        # This will fail start tljh but should successfully get to the point
+        # This will fail start jet but should successfully get to the point
         # Where it stops the progress page server.
         output = installer.result()
 

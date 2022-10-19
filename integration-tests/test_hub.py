@@ -10,12 +10,12 @@ import pwd
 import grp
 import subprocess
 from os import system
-from tljh.normalize import generate_system_username
+from jet.normalize import generate_system_username
 
 
 # Use sudo to invoke it, since this is how users invoke it.
 # This catches issues with PATH
-TLJH_CONFIG_PATH = ["sudo", "tljh-config"]
+JET_CONFIG_PATH = ["sudo", "jet-config"]
 
 
 def test_hub_up():
@@ -37,14 +37,14 @@ async def test_user_code_execute():
         0
         == await (
             await asyncio.create_subprocess_exec(
-                *TLJH_CONFIG_PATH, "set", "auth.type", "dummy"
+                *JET_CONFIG_PATH, "set", "auth.type", "dummy"
             )
         ).wait()
     )
     assert (
         0
         == await (
-            await asyncio.create_subprocess_exec(*TLJH_CONFIG_PATH, "reload")
+            await asyncio.create_subprocess_exec(*JET_CONFIG_PATH, "reload")
         ).wait()
     )
 
@@ -73,7 +73,7 @@ async def test_user_server_started_with_custom_base_url():
         0
         == await (
             await asyncio.create_subprocess_exec(
-                *TLJH_CONFIG_PATH, "set", "auth.type", "dummy"
+                *JET_CONFIG_PATH, "set", "auth.type", "dummy"
             )
         ).wait()
     )
@@ -81,14 +81,14 @@ async def test_user_server_started_with_custom_base_url():
         0
         == await (
             await asyncio.create_subprocess_exec(
-                *TLJH_CONFIG_PATH, "set", "base_url", base_url
+                *JET_CONFIG_PATH, "set", "base_url", base_url
             )
         ).wait()
     )
     assert (
         0
         == await (
-            await asyncio.create_subprocess_exec(*TLJH_CONFIG_PATH, "reload")
+            await asyncio.create_subprocess_exec(*JET_CONFIG_PATH, "reload")
         ).wait()
     )
 
@@ -101,14 +101,14 @@ async def test_user_server_started_with_custom_base_url():
             0
             == await (
                 await asyncio.create_subprocess_exec(
-                    *TLJH_CONFIG_PATH, "unset", "base_url"
+                    *JET_CONFIG_PATH, "unset", "base_url"
                 )
             ).wait()
         )
         assert (
             0
             == await (
-                await asyncio.create_subprocess_exec(*TLJH_CONFIG_PATH, "reload")
+                await asyncio.create_subprocess_exec(*JET_CONFIG_PATH, "reload")
             ).wait()
         )
 
@@ -127,7 +127,7 @@ async def test_user_admin_add():
         0
         == await (
             await asyncio.create_subprocess_exec(
-                *TLJH_CONFIG_PATH, "set", "auth.type", "dummy"
+                *JET_CONFIG_PATH, "set", "auth.type", "dummy"
             )
         ).wait()
     )
@@ -135,14 +135,14 @@ async def test_user_admin_add():
         0
         == await (
             await asyncio.create_subprocess_exec(
-                *TLJH_CONFIG_PATH, "add-item", "users.admin", username
+                *JET_CONFIG_PATH, "add-item", "users.admin", username
             )
         ).wait()
     )
     assert (
         0
         == await (
-            await asyncio.create_subprocess_exec(*TLJH_CONFIG_PATH, "reload")
+            await asyncio.create_subprocess_exec(*JET_CONFIG_PATH, "reload")
         ).wait()
     )
 
@@ -175,7 +175,7 @@ async def test_user_admin_remove():
         0
         == await (
             await asyncio.create_subprocess_exec(
-                *TLJH_CONFIG_PATH, "set", "auth.type", "dummy"
+                *JET_CONFIG_PATH, "set", "auth.type", "dummy"
             )
         ).wait()
     )
@@ -183,14 +183,14 @@ async def test_user_admin_remove():
         0
         == await (
             await asyncio.create_subprocess_exec(
-                *TLJH_CONFIG_PATH, "add-item", "users.admin", username
+                *JET_CONFIG_PATH, "add-item", "users.admin", username
             )
         ).wait()
     )
     assert (
         0
         == await (
-            await asyncio.create_subprocess_exec(*TLJH_CONFIG_PATH, "reload")
+            await asyncio.create_subprocess_exec(*JET_CONFIG_PATH, "reload")
         ).wait()
     )
 
@@ -208,14 +208,14 @@ async def test_user_admin_remove():
             0
             == await (
                 await asyncio.create_subprocess_exec(
-                    *TLJH_CONFIG_PATH, "remove-item", "users.admin", username
+                    *JET_CONFIG_PATH, "remove-item", "users.admin", username
                 )
             ).wait()
         )
         assert (
             0
             == await (
-                await asyncio.create_subprocess_exec(*TLJH_CONFIG_PATH, "reload")
+                await asyncio.create_subprocess_exec(*JET_CONFIG_PATH, "reload")
             ).wait()
         )
 
@@ -240,14 +240,14 @@ async def test_long_username():
         0
         == await (
             await asyncio.create_subprocess_exec(
-                *TLJH_CONFIG_PATH, "set", "auth.type", "dummy"
+                *JET_CONFIG_PATH, "set", "auth.type", "dummy"
             )
         ).wait()
     )
     assert (
         0
         == await (
-            await asyncio.create_subprocess_exec(*TLJH_CONFIG_PATH, "reload")
+            await asyncio.create_subprocess_exec(*JET_CONFIG_PATH, "reload")
         ).wait()
     )
 
@@ -284,7 +284,7 @@ async def test_user_group_adding():
         0
         == await (
             await asyncio.create_subprocess_exec(
-                *TLJH_CONFIG_PATH, "set", "auth.type", "dummy"
+                *JET_CONFIG_PATH, "set", "auth.type", "dummy"
             )
         ).wait()
     )
@@ -292,7 +292,7 @@ async def test_user_group_adding():
         0
         == await (
             await asyncio.create_subprocess_exec(
-                *TLJH_CONFIG_PATH,
+                *JET_CONFIG_PATH,
                 "add-item",
                 "users.extra_user_groups.somegroup",
                 username,
@@ -302,7 +302,7 @@ async def test_user_group_adding():
     assert (
         0
         == await (
-            await asyncio.create_subprocess_exec(*TLJH_CONFIG_PATH, "reload")
+            await asyncio.create_subprocess_exec(*JET_CONFIG_PATH, "reload")
         ).wait()
     )
 
@@ -342,7 +342,7 @@ async def test_idle_server_culled():
         0
         == await (
             await asyncio.create_subprocess_exec(
-                *TLJH_CONFIG_PATH, "set", "auth.type", "dummy"
+                *JET_CONFIG_PATH, "set", "auth.type", "dummy"
             )
         ).wait()
     )
@@ -351,7 +351,7 @@ async def test_idle_server_culled():
         0
         == await (
             await asyncio.create_subprocess_exec(
-                *TLJH_CONFIG_PATH, "set", "services.cull.every", "10"
+                *JET_CONFIG_PATH, "set", "services.cull.every", "10"
             )
         ).wait()
     )
@@ -360,7 +360,7 @@ async def test_idle_server_culled():
         0
         == await (
             await asyncio.create_subprocess_exec(
-                *TLJH_CONFIG_PATH, "set", "services.cull.users", "True"
+                *JET_CONFIG_PATH, "set", "services.cull.users", "True"
             )
         ).wait()
     )
@@ -369,14 +369,14 @@ async def test_idle_server_culled():
         0
         == await (
             await asyncio.create_subprocess_exec(
-                *TLJH_CONFIG_PATH, "set", "services.cull.max_age", "60"
+                *JET_CONFIG_PATH, "set", "services.cull.max_age", "60"
             )
         ).wait()
     )
     assert (
         0
         == await (
-            await asyncio.create_subprocess_exec(*TLJH_CONFIG_PATH, "reload")
+            await asyncio.create_subprocess_exec(*JET_CONFIG_PATH, "reload")
         ).wait()
     )
 
@@ -425,7 +425,7 @@ async def test_active_server_not_culled():
         0
         == await (
             await asyncio.create_subprocess_exec(
-                *TLJH_CONFIG_PATH, "set", "auth.type", "dummy"
+                *JET_CONFIG_PATH, "set", "auth.type", "dummy"
             )
         ).wait()
     )
@@ -434,7 +434,7 @@ async def test_active_server_not_culled():
         0
         == await (
             await asyncio.create_subprocess_exec(
-                *TLJH_CONFIG_PATH, "set", "services.cull.every", "10"
+                *JET_CONFIG_PATH, "set", "services.cull.every", "10"
             )
         ).wait()
     )
@@ -443,7 +443,7 @@ async def test_active_server_not_culled():
         0
         == await (
             await asyncio.create_subprocess_exec(
-                *TLJH_CONFIG_PATH, "set", "services.cull.users", "True"
+                *JET_CONFIG_PATH, "set", "services.cull.users", "True"
             )
         ).wait()
     )
@@ -452,14 +452,14 @@ async def test_active_server_not_culled():
         0
         == await (
             await asyncio.create_subprocess_exec(
-                *TLJH_CONFIG_PATH, "set", "services.cull.max_age", "60"
+                *JET_CONFIG_PATH, "set", "services.cull.max_age", "60"
             )
         ).wait()
     )
     assert (
         0
         == await (
-            await asyncio.create_subprocess_exec(*TLJH_CONFIG_PATH, "reload")
+            await asyncio.create_subprocess_exec(*JET_CONFIG_PATH, "reload")
         ).wait()
     )
 

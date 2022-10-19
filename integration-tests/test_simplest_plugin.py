@@ -6,8 +6,8 @@ import requests
 import os
 import subprocess
 
-from tljh.config import CONFIG_FILE, USER_ENV_PREFIX, HUB_ENV_PREFIX
-from tljh import user
+from jet.config import CONFIG_FILE, USER_ENV_PREFIX, HUB_ENV_PREFIX
+from jet import user
 
 yaml = YAML(typ="rt")
 

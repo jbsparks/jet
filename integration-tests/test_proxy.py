@@ -9,7 +9,7 @@ import toml
 from tornado.httpclient import HTTPClient, HTTPRequest, HTTPClientError
 import pytest
 
-from tljh.config import (
+from jet.config import (
     reload_component,
     set_config_value,
     CONFIG_FILE,
@@ -42,7 +42,7 @@ def send_request(url, max_sleep, validate_cert=True, username=None, password=Non
 
 
 def test_manual_https(preserve_config):
-    ssl_dir = "/etc/tljh-ssl-test"
+    ssl_dir = "/etc/jet-ssl-test"
     key = ssl_dir + "/ssl.key"
     cert = ssl_dir + "/ssl.cert"
     os.makedirs(ssl_dir, exist_ok=True)
@@ -63,7 +63,7 @@ def test_manual_https(preserve_config):
             "-out",
             cert,
             "-subj",
-            "/CN=tljh.jupyer.org",
+            "/CN=jet.jupyer.org",
         ]
     )
     set_config_value(CONFIG_FILE, "https.enabled", True)

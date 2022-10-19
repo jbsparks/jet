@@ -12,7 +12,7 @@ import pytest
 
 ADMIN_GROUP = "jupyterhub-admins"
 USER_GROUP = "jupyterhub-users"
-INSTALL_PREFIX = os.environ.get("TLJH_INSTALL_PREFIX", "/opt/tljh")
+INSTALL_PREFIX = os.environ.get("JET_INSTALL_PREFIX", "/opt/jet")
 HUB_PREFIX = os.path.join(INSTALL_PREFIX, "hub")
 USER_PREFIX = os.path.join(INSTALL_PREFIX, "user")
 STATE_DIR = os.path.join(INSTALL_PREFIX, "state")
@@ -119,7 +119,7 @@ def test_admin_writable():
 
 def test_installer_log_readable():
     # Test that installer.log is owned by root, and not readable by anyone else
-    file_stat = os.stat("/opt/tljh/installer.log")
+    file_stat = os.stat("/opt/jet/installer.log")
     assert file_stat.st_uid == 0
     assert file_stat.st_mode == 0o100500
 
@@ -232,6 +232,6 @@ def test_pip_upgrade(group, allowed):
 
 def test_symlinks():
     """
-    Test we symlink tljh-config to /usr/local/bin
+    Test we symlink jet-config to /usr/local/bin
     """
-    assert os.path.exists("/usr/bin/tljh-config")
+    assert os.path.exists("/usr/bin/jet-config")

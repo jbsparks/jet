@@ -1,7 +1,7 @@
 from setuptools import setup
 
 setup(
-    name="tljh-simplest",
-    entry_points={"tljh": ["simplest = tljh_simplest"]},
-    py_modules=["tljh_simplest"],
+    name="jet-simplest",
+    entry_points={"jet": ["simplest = jet_simplest"]},
+    py_modules=["jet_simplest"],
 )

@@ -23,8 +23,8 @@ RUN systemctl set-default multi-user.target
 STOPSIGNAL SIGRTMIN+3
 
 # comment these lines out for a none-development install
-ENV TLJH_BOOTSTRAP_DEV=yes
-ENV TLJH_BOOTSTRAP_PIP_SPEC=/srv/src
+ENV JET_BOOTSTRAP_DEV=yes
+ENV JET_BOOTSTRAP_PIP_SPEC=/srv/src
 ENV PATH=/opt/tljh/hub/bin:${PATH}
 
 CMD ["/bin/bash", "-c", "exec /usr/lib/systemd/systemd --log-target=journal 3>&1"]

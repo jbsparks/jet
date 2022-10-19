@@ -1,6 +1,6 @@
 #  CCPE JupyterHub Experience Tutorial (JET) ![](jetpack.png)
 
-[![GitHub](https://img.shields.io/badge/issue_tracking-github-blue?logo=github)](https://github.hpe.com/jonathan-sparks/io/issues)
+[![GitHub](https://img.shields.io/badge/issue_tracking-github-blue?logo=github)](https://github.com/jbsparks/jet/issues)
 
 **CCPE JupyterHub Experience Tutorial** (JET) distribution helps you provide Jupyter Notebooks
 to 1-100 users on a single server.
