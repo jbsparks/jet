@@ -5,10 +5,10 @@ JupyterHub config for the littlest jupyterhub.
 from glob import glob
 import os
 
-from tljh import configurer
-from tljh.config import INSTALL_PREFIX, USER_ENV_PREFIX, CONFIG_DIR
-from tljh.utils import get_plugin_manager
-from tljh.user_creating_spawner import UserCreatingSpawner
+from jet import configurer
+from jet.config import INSTALL_PREFIX, USER_ENV_PREFIX, CONFIG_DIR
+from jet.utils import get_plugin_manager
+from jet.user_creating_spawner import UserCreatingSpawner
 from jupyterhub_traefik_proxy import TraefikTomlProxy
 
 c.JupyterHub.spawner_class = UserCreatingSpawner
@@ -30,14 +30,14 @@ c.SystemdSpawner.default_shell = "/bin/bash"
 # Drop the '-singleuser' suffix present in the default template
 c.SystemdSpawner.unit_name_template = "jupyter-{USERNAME}"
 
-tljh_config = configurer.load_config()
-configurer.apply_config(tljh_config, c)
+jet_config = configurer.load_config()
+configurer.apply_config(jet_config, c)
 
 # Let TLJH hooks modify `c` if they want
 
 # Call our custom configuration plugin
 pm = get_plugin_manager()
-pm.hook.tljh_custom_jupyterhub_config(c=c)
+pm.hook.jet_custom_jupyterhub_config(c=c)
 
 # Load arbitrary .py config files if they exist.
 # This is our escape hatch

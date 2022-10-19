@@ -14,7 +14,7 @@ import sys
 from .config import CONFIG_FILE, STATE_DIR
 from .yaml import yaml
 
-# Default configuration for tljh
+# Default configuration for jet
 # User provided config is merged into this
 default = {
     "base_url": "/",
@@ -86,17 +86,17 @@ def apply_config(config_overrides, c):
     """
     Merge config_overrides with config defaults & apply to JupyterHub config c
     """
-    tljh_config = _merge_dictionaries(dict(default), config_overrides)
+    jet_config = _merge_dictionaries(dict(default), config_overrides)
 
-    update_base_url(c, tljh_config)
-    update_auth(c, tljh_config)
-    update_userlists(c, tljh_config)
-    update_usergroups(c, tljh_config)
-    update_limits(c, tljh_config)
-    update_user_environment(c, tljh_config)
-    update_user_account_config(c, tljh_config)
-    update_traefik_api(c, tljh_config)
-    update_services(c, tljh_config)
+    update_base_url(c, jet_config)
+    update_auth(c, jet_config)
+    update_userlists(c, jet_config)
+    update_usergroups(c, jet_config)
+    update_limits(c, jet_config)
+    update_user_environment(c, jet_config)
+    update_user_account_config(c, jet_config)
+    update_traefik_api(c, jet_config)
+    update_services(c, jet_config)
 
 
 def set_if_not_none(parent, key, value):
@@ -133,7 +133,7 @@ def load_secrets():
 
 def update_base_url(c, config):
     """
-    Update base_url of JupyterHub through tljh config
+    Update base_url of JupyterHub through jet config
     """
     c.JupyterHub.base_url = config["base_url"]
 
@@ -172,11 +172,11 @@ def update_auth(c, config):
     c.JupyterHub.authenticator_class and any configured value being None won't
     be set.
     """
-    tljh_auth_config = config["auth"]
+    jet_auth_config = config["auth"]
 
-    c.JupyterHub.authenticator_class = tljh_auth_config["type"]
+    c.JupyterHub.authenticator_class = jet_auth_config["type"]
 
-    for auth_key, auth_value in tljh_auth_config.items():
+    for auth_key, auth_value in jet_auth_config.items():
         if not (auth_key[0] == auth_key[0].upper() and isinstance(auth_value, dict)):
             if auth_key == "type":
                 continue

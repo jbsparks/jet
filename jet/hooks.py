@@ -3,12 +3,12 @@ Hook specifications that pluggy plugins can override
 """
 import pluggy
 
-hookspec = pluggy.HookspecMarker("tljh")
-hookimpl = pluggy.HookimplMarker("tljh")
+hookspec = pluggy.HookspecMarker("jet")
+hookimpl = pluggy.HookimplMarker("jet")
 
 
 @hookspec
-def tljh_extra_user_conda_packages():
+def jet_extra_user_conda_packages():
     """
     Return list of extra conda packages to install in user environment.
     """
@@ -16,7 +16,7 @@ def tljh_extra_user_conda_packages():
 
 
 @hookspec
-def tljh_extra_user_pip_packages():
+def jet_extra_user_pip_packages():
     """
     Return list of extra pip packages to install in user environment.
     """
@@ -24,7 +24,7 @@ def tljh_extra_user_pip_packages():
 
 
 @hookspec
-def tljh_extra_hub_pip_packages():
+def jet_extra_hub_pip_packages():
     """
     Return list of extra pip packages to install in the hub environment.
     """
@@ -32,7 +32,7 @@ def tljh_extra_hub_pip_packages():
 
 
 @hookspec
-def tljh_extra_apt_packages():
+def jet_extra_apt_packages():
     """
     Return list of extra apt packages to install in the user environment.
 
@@ -42,7 +42,7 @@ def tljh_extra_apt_packages():
 
 
 @hookspec
-def tljh_custom_jupyterhub_config(c):
+def jet_custom_jupyterhub_config(c):
     """
     Provide custom traitlet based config to JupyterHub.
 
@@ -53,9 +53,9 @@ def tljh_custom_jupyterhub_config(c):
 
 
 @hookspec
-def tljh_config_post_install(config):
+def jet_config_post_install(config):
     """
-    Modify on-disk tljh-config after installation.
+    Modify on-disk jet-config after installation.
 
     config is a dict-like object that should be modified
     in-place. The contents of the on-disk config.yaml will
@@ -66,7 +66,7 @@ def tljh_config_post_install(config):
 
 
 @hookspec
-def tljh_post_install():
+def jet_post_install():
     """
     Post install script to be executed after installation
     and after all the other hooks.
@@ -77,7 +77,7 @@ def tljh_post_install():
 
 
 @hookspec
-def tljh_new_user_create(username):
+def jet_new_user_create(username):
     """
     Script to be executed after a new user has been added.
     This can be arbitrary Python code.

@@ -1,18 +1,18 @@
-"""Migration utilities for upgrading tljh"""
+"""Migration utilities for upgrading jet"""
 
 import os
 from datetime import date
 import logging
 import shutil
 
-from tljh.config import (
+from jet.config import (
     CONFIG_DIR,
     CONFIG_FILE,
     INSTALL_PREFIX,
 )
 
 
-logger = logging.getLogger("tljh")
+logger = logging.getLogger("jet")
 
 
 def migrate_file(old_path, new_path):

@@ -1,5 +1,5 @@
-# When tljh.installer runs, the users' environment as typically found in
-# /opt/tljh/user, is setup with these packages.
+# When jet.installer runs, the users' environment as typically found in
+# /opt/jet/user, is setup with these packages.
 #
 # WARNING: The order of these dependencies matters, this was observed when using
 #          the requirements-txt-fixer pre-commit hook that sorted them and made

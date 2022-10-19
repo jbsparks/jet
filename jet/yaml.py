@@ -1,7 +1,7 @@
 """consolidated yaml API
 
 ensures the same yaml settings for reading/writing
-throughout tljh
+throughout jet
 """
 from ruamel.yaml.composer import Composer
 from ruamel.yaml import YAML

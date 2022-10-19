@@ -1,10 +1,10 @@
 from setuptools import setup, find_packages
 
 setup(
-    name="the-littlest-jupyterhub",
+    name="JupyterHub_Experience_Tutorial",
     version="0.1",
     description="A small JupyterHub distribution",
-    url="https://github.com/jupyterhub/the-littlest-jupyterhub",
+    url="https://github.com/jbsparks/jet",
     author="Jupyter Development Team",
     author_email="jupyter@googlegroups.com",
     license="3 Clause BSD",
@@ -22,7 +22,7 @@ setup(
     ],
     entry_points={
         "console_scripts": [
-            "tljh-config = tljh.config:main",
+            "jet-config = jet.config:main",
         ]
     },
 )

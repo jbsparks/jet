@@ -1,5 +1,5 @@
 """
-User management for tljh.
+User management for jet.
 
 Supports minimal user & group management
 """
@@ -9,7 +9,7 @@ import subprocess
 from os.path import expanduser
 
 # Set up plugin infrastructure
-from tljh.utils import get_plugin_manager
+from jet.utils import get_plugin_manager
 
 
 def ensure_user(username):
@@ -30,7 +30,7 @@ def ensure_user(username):
     subprocess.check_call(["chmod", "o-rwx", expanduser(f"~{username}")])
 
     pm = get_plugin_manager()
-    pm.hook.tljh_new_user_create(username=username)
+    pm.hook.jet_new_user_create(username=username)
 
 
 def remove_user(username):

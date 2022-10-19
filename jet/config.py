@@ -3,13 +3,13 @@ Commandline interface for setting config items in config.yaml.
 
 Used as:
 
-tljh-config set firstlevel.second_level something
+jet-config set firstlevel.second_level something
 
-tljh-config show
+jet-config show
 
-tljh-config show firstlevel
+jet-config show firstlevel
 
-tljh-config show firstlevel.second_level
+jet-config show firstlevel.second_level
 """
 
 import argparse
@@ -25,7 +25,7 @@ import requests
 from .yaml import yaml
 
 
-INSTALL_PREFIX = os.environ.get("TLJH_INSTALL_PREFIX", "/opt/tljh")
+INSTALL_PREFIX = os.environ.get("TLJH_INSTALL_PREFIX", "/opt/jet")
 HUB_ENV_PREFIX = os.path.join(INSTALL_PREFIX, "hub")
 USER_ENV_PREFIX = os.path.join(INSTALL_PREFIX, "user")
 STATE_DIR = os.path.join(INSTALL_PREFIX, "state")
@@ -262,7 +262,7 @@ def reload_component(component):
     component can be 'hub' or 'proxy'.
     """
     # import here to avoid circular imports
-    from tljh import systemd, traefik
+    from jet import systemd, traefik
 
     if component == "hub":
         systemd.restart_service("jupyterhub")
@@ -307,9 +307,9 @@ def _is_list(item):
 
 def main(argv=None):
     if os.geteuid() != 0:
-        print("tljh-config needs root privileges to run", file=sys.stderr)
+        print("jet-config needs root privileges to run", file=sys.stderr)
         print(
-            "Try using sudo before the tljh-config command you wanted to run",
+            "Try using sudo before the jet-config command you wanted to run",
             file=sys.stderr,
         )
         sys.exit(1)

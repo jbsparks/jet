@@ -9,7 +9,7 @@ import contextlib
 import tempfile
 import requests
 from distutils.version import LooseVersion as V
-from tljh import utils
+from jet import utils
 
 
 def sha256_file(fname):

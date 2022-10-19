@@ -10,7 +10,7 @@ import requests
 import toml
 
 from .config import CONFIG_DIR
-from tljh.configurer import load_config, _merge_dictionaries
+from jet.configurer import load_config, _merge_dictionaries
 
 # traefik 2.7.x is not supported yet, use v1.7.x for now
 # see: https://github.com/jupyterhub/traefik-proxy/issues/97
@@ -46,7 +46,8 @@ def fatal_error(e):
 
 @backoff.on_exception(backoff.expo, Exception, max_tries=2, giveup=fatal_error)
 def ensure_traefik_binary(prefix):
-    """Download and install the traefik binary to a location identified by a prefix path such as '/opt/tljh/hub/'"""
+    """Download and install the traefik binary to a location identified by a prefix path such as '/opt/jet/hub/'"""
+
     traefik_bin = os.path.join(prefix, "bin", "traefik")
     if os.path.exists(traefik_bin):
         checksum = checksum_file(traefik_bin)

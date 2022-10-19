@@ -1,6 +1,6 @@
-from tljh.normalize import generate_system_username
-from tljh import user
-from tljh import configurer
+from jet.normalize import generate_system_username
+from jet import user
+from jet import configurer
 from systemdspawner import SystemdSpawner
 from traitlets import Dict, Unicode, List
 from jupyterhub_configurator.mixins import ConfiguratorSpawnerMixin

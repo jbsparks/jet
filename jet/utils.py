@@ -7,7 +7,7 @@ import subprocess
 # Copied into bootstrap/bootstrap.py. Make sure these two copies are exactly the same!
 import pluggy
 
-from tljh import hooks
+from jhub import hooks
 
 
 # This function is needed also by the bootstrap script that starts this
@@ -20,10 +20,10 @@ def run_subprocess(cmd, *args, **kwargs):
     If command succeeds, print output to debug logging.
     If it fails, print output to info logging.
 
-    In TLJH, this sends successful output to the installer log,
+    In JET, this sends successful output to the installer log,
     and failed output directly to the user's screen
     """
-    logger = logging.getLogger("tljh")
+    logger = logging.getLogger("jet")
     proc = subprocess.run(
         cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, *args, **kwargs
     )
@@ -54,8 +54,8 @@ def get_plugin_manager():
     Return plugin manager instance
     """
     # Set up plugin infrastructure
-    pm = pluggy.PluginManager("tljh")
+    pm = pluggy.PluginManager("jet")
     pm.add_hookspecs(hooks)
-    pm.load_setuptools_entrypoints("tljh")
+    pm.load_setuptools_entrypoints("jet")
 
     return pm

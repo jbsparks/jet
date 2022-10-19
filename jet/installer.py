@@ -1,4 +1,4 @@
-"""Installation logic for TLJH"""
+"""Installation logic for JET"""
 
 import argparse
 import dbm
@@ -17,8 +17,8 @@ import pluggy
 import requests
 from requests.packages.urllib3.exceptions import InsecureRequestWarning
 
-from tljh import (
-    apt,
+from jet import (
+    zypper,
     conda,
     hooks,
     migrator,
@@ -38,7 +38,7 @@ from .yaml import yaml
 
 HERE = os.path.abspath(os.path.dirname(__file__))
 
-logger = logging.getLogger("tljh")
+logger = logging.getLogger("jet")
 
 
 def remove_chp():
@@ -300,27 +300,27 @@ def ensure_symlinks(prefix):
     Ensure we symlink appropriate things into /usr/bin
 
     We add the user conda environment to PATH for notebook terminals,
-    but not the hub venv. This means tljh-config is not actually accessible.
+    but not the hub venv. This means jet-config is not actually accessible.
 
     We symlink to /usr/bin and not /usr/local/bin, since /usr/local/bin is
     not place, and works with sudo -E in sudo's search $PATH. We can work
     around this with sudo -E and extra entries in the sudoers file, but this
     is far more secure at the cost of upsetting some FHS purists.
     """
-    tljh_config_src = os.path.join(prefix, "bin", "tljh-config")
-    tljh_config_dest = "/usr/bin/tljh-config"
-    if os.path.exists(tljh_config_dest):
-        if os.path.realpath(tljh_config_dest) != tljh_config_src:
-            #  tljh-config exists that isn't ours. We should *not* delete this file,
+    jet_config_src = os.path.join(prefix, "bin", "jet-config")
+    jet_config_dest = "/usr/bin/jet-config"
+    if os.path.exists(jet_config_dest):
+        if os.path.realpath(jet_config_dest) != jet_config_src:
+            #  jet-config exists that isn't ours. We should *not* delete this file,
             # instead we throw an error and abort. Deleting files owned by other people
             # while running as root is dangerous, especially with symlinks involved.
             raise FileExistsError(
-                f"/usr/bin/tljh-config exists but is not a symlink to {tljh_config_src}"
+                f"/usr/bin/jet-config exists but is not a symlink to {jet_config_src}"
             )
         else:
             # We have a working symlink, so do nothing
             return
-    os.symlink(tljh_config_src, tljh_config_dest)
+    os.symlink(jet_config_src, jet_config_dest)
 
 
 def setup_plugins(plugins=None):
@@ -332,9 +332,9 @@ def setup_plugins(plugins=None):
         conda.ensure_pip_packages(HUB_ENV_PREFIX, plugins, upgrade=True)
 
     # Set up plugin infrastructure
-    pm = pluggy.PluginManager("tljh")
+    pm = pluggy.PluginManager("jet")
     pm.add_hookspecs(hooks)
-    pm.load_setuptools_entrypoints("tljh")
+    pm.load_setuptools_entrypoints("jet")
 
     return pm
 
@@ -345,7 +345,7 @@ def run_plugin_actions(plugin_manager):
     """
     hook = plugin_manager.hook
     # Install apt packages
-    apt_packages = list(set(itertools.chain(*hook.tljh_extra_apt_packages())))
+    apt_packages = list(set(itertools.chain(*hook.jet_extra_apt_packages())))
     if apt_packages:
         logger.info(
             "Installing {} apt packages collected from plugins: {}".format(
@@ -355,7 +355,7 @@ def run_plugin_actions(plugin_manager):
         apt.install_packages(apt_packages)
 
     # Install hub pip packages
-    hub_pip_packages = list(set(itertools.chain(*hook.tljh_extra_hub_pip_packages())))
+    hub_pip_packages = list(set(itertools.chain(*hook.jet_extra_hub_pip_packages())))
     if hub_pip_packages:
         logger.info(
             "Installing {} hub pip packages collected from plugins: {}".format(
@@ -369,7 +369,7 @@ def run_plugin_actions(plugin_manager):
         )
 
     # Install conda packages
-    conda_packages = list(set(itertools.chain(*hook.tljh_extra_user_conda_packages())))
+    conda_packages = list(set(itertools.chain(*hook.jet_extra_user_conda_packages())))
     if conda_packages:
         logger.info(
             "Installing {} user conda packages collected from plugins: {}".format(
@@ -379,7 +379,7 @@ def run_plugin_actions(plugin_manager):
         conda.ensure_conda_packages(USER_ENV_PREFIX, conda_packages)
 
     # Install pip packages
-    user_pip_packages = list(set(itertools.chain(*hook.tljh_extra_user_pip_packages())))
+    user_pip_packages = list(set(itertools.chain(*hook.jet_extra_user_pip_packages())))
     if user_pip_packages:
         logger.info(
             "Installing {} user pip packages collected from plugins: {}".format(
@@ -393,7 +393,7 @@ def run_plugin_actions(plugin_manager):
         )
 
     # Custom post install actions
-    hook.tljh_post_install()
+    hook.jet_post_install()
 
 
 def ensure_config_yaml(plugin_manager):
@@ -413,7 +413,7 @@ def ensure_config_yaml(plugin_manager):
         config = {}
 
     hook = plugin_manager.hook
-    hook.tljh_config_post_install(config=config)
+    hook.jet_config_post_install(config=config)
 
     with open(CONFIG_FILE, "w+") as f:
         yaml.dump(config, f)
