@@ -129,6 +129,7 @@ def ensure_jupyterhub_package(prefix):
             "jupyterhub-tmpauthenticator==0.6.*",
             "oauthenticator==14.*",
             "jupyterhub-idle-culler==1.*",
+            "bash_kernel",
             "git+https://github.com/yuvipanda/jupyterhub-configurator@317759e17c8e48de1b1352b836dac2a230536dba",
         ],
         upgrade=True,
@@ -325,7 +326,7 @@ def ensure_symlinks(prefix):
 
 def setup_plugins(plugins=None):
     """
-    Install plugins & setup a pluginmanager
+    Install plugins & setup a plugin manager
     """
     # Install plugins
     if plugins:
