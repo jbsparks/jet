@@ -40,4 +40,4 @@ def install_packages(packages):
     utils.run_subprocess(["zypper", "update", "-y"])
     env = os.environ.copy()
     # Stop apt from asking questions!
-    utils.run_subprocess(["zyppper", "install", "-y"] + packages, env=env)
+    utils.run_subprocess(["zypper", "install", "-y"] + packages, env=env)
