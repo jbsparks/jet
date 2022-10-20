@@ -1,0 +1,8 @@
+backoff
+bcrypt
+jinja2
+jupyterhub-traefik-proxy==0.3.*
+passlib
+pluggy==1.*
+requests
+ruamel.yaml==0.17.*

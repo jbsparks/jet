@@ -115,7 +115,7 @@ def ensure_jupyterhub_package(prefix):
     # Install pycurl. JupyterHub prefers pycurl over SimpleHTTPClient automatically
     # pycurl is generally more bugfree - see https://github.com/jupyterhub/the-littlest-jupyterhub/issues/289
     # build-essential is also generally useful to everyone involved, and required for pycurl
-    apt.install_packages(["libssl-dev", "libcurl4-openssl-dev", "build-essential"])
+    zypper.install_packages(["libssl-dev", "libcurl4-openssl-dev", "build-essential"])
     conda.ensure_pip_packages(prefix, ["pycurl==7.*"], upgrade=True)
 
     conda.ensure_pip_packages(
