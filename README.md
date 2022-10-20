@@ -98,10 +98,15 @@ _Or, if you would like to setup the admin’s password during install, you can u
 python3 /srv/src/bootstrap/bootstrap.py --admin admin:<password>
 ```
 * The primary hub environment will also be in your PATH already for convenience.
-You should be able to access the JupyterHub from your browser now at [http://localhost:12000](http://localhost:12000). Congratulations, you are set up to develop **JET**!
+You should be able to access the JupyterHub from your browser now at [http://localhost:12000](http://localhost:12000). 
+
+  Congratulations, you are set up to develop **JET**!
 * Make some changes to the repository. You can test easily depending on what you changed.
-  * If you changed the bootstrap/bootstrap.py script or any of its dependencies, you can test it by running python3 /srv/src/bootstrap/bootstrap.py.
-  * If you changed the tljh/installer.py code (or any of its dependencies), you can test it by running python3 -m tljh.installer.
-  * If you changed tljh/jupyterhub_config.py, tljh/configurer.py, /opt/tljh/config/ or any of their dependencies, you only need to restart jupyterhub for them to take effect. tljh-config reload hub should do that.
+
+  * If you changed the bootstrap/bootstrap.py script or any of its dependencies, you can test it by running ``python3 /srv/src/bootstrap/bootstrap.py``.
+
+  * If you changed the jet/installer.py code (or any of its dependencies), you can test it by running ``python3 -m jet.installer``.
+
+  * If you changed jet/jupyterhub_config.py, jet/configurer.py, /opt/jet/config/ or any of their dependencies, you only need to restart jupyterhub for them to take effect. jet-config reload hub should do that.
 
 Looking at Logs has information on looking at various logs in the container to debug issues you might have.

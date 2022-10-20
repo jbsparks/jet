@@ -32,9 +32,9 @@ def jet_extra_hub_pip_packages():
 
 
 @hookspec
-def jet_extra_apt_packages():
+def jet_extra_zypper_packages():
     """
-    Return list of extra apt packages to install in the user environment.
+    Return list of extra SLE packages to install in the user environment.
 
     These will be installed before additional pip or conda packages.
     """

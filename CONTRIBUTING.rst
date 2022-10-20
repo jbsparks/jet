@@ -1,4 +1,4 @@
-Contributing to The Littlest JupyterHub development
+Contributing to JET development
 ---------------------------------------------------
 
 This is an open source project that is developed and maintained by volunteers.

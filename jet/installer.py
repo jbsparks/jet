@@ -130,6 +130,19 @@ def ensure_jupyterhub_package(prefix):
             "oauthenticator==14.*",
             "jupyterhub-idle-culler==1.*",
             "bash_kernel",
+            "papermill", 
+            'allthekernels',
+            'magics',
+            'nbconvert',
+            'matplotlib',
+            'pandas',
+            'jupyter_bokeh',
+            'jupyter_dashboards',
+            'jupyterlab-interactive-dashboard-editor',
+            'seaborn',
+            'widgetsnbextension',
+            'voila',
+            'ipysheet',
             "git+https://github.com/yuvipanda/jupyterhub-configurator@317759e17c8e48de1b1352b836dac2a230536dba",
         ],
         upgrade=True,
@@ -345,15 +358,15 @@ def run_plugin_actions(plugin_manager):
     Run installer hooks defined in plugins
     """
     hook = plugin_manager.hook
-    # Install apt packages
-    apt_packages = list(set(itertools.chain(*hook.jet_extra_apt_packages())))
-    if apt_packages:
+    # Install zypper packages
+    zypper_packages = list(set(itertools.chain(*hook.jet_extra_zypper_packages())))
+    if zypper_packages:
         logger.info(
-            "Installing {} apt packages collected from plugins: {}".format(
-                len(apt_packages), " ".join(apt_packages)
+            "Installing {} zypper packages collected from plugins: {}".format(
+                len(zypper_packages), " ".join(zypper_packages)
             )
         )
-        apt.install_packages(apt_packages)
+        zypper.install_packages(zypper_packages)
 
     # Install hub pip packages
     hub_pip_packages = list(set(itertools.chain(*hook.jet_extra_hub_pip_packages())))
