@@ -10,8 +10,8 @@ but would like to provide hosted Jupyter Notebooks for their students or users.
 All users are provided with the same environment, and administrators
 can easily install libraries into this environment without any specialized knowledge.
 
-See the [latest documentation](https://github.hpe.com/jonathan-sparks/io/docs)
-for more information on using The Littlest JupyterHub.
+See the [latest documentation](https://github.com/jbsparks/jet/tree/main/docs)
+for more information on using JET or 'The Littlest JupyterHub' from which it's derived from, albeit this is SLES based.
 
 ## Development Status
 
@@ -37,15 +37,13 @@ We have several tutorials to get you started.
 
 ## Documentation
 
-Our latest documentation is at: **Note:** not sure HPE has a user-provider doc server
-
 We place a high importance on consistency, readability and completeness of
 documentation. If a feature is not documented, it does not exist. If a behavior
 is not documented, it is a bug! We try to treat our documentation like we treat
 our code: we aim to improve it as often as possible.
 
 If something is confusing to you in the documentation, it is a bug. We would be
-happy if you could [file an issue on the HPE github project](https://github.hpe.com/jonathan-sparks/io/issues) about it - or
+happy if you could [file an issue on the github project](https://github.com/jbsparks/jet/issues) about it - or
 even better, contribute.
 
 ## How to get started, a developers guide
