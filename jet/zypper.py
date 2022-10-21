@@ -37,7 +37,7 @@ def install_packages(packages):
     Install sles packages
     """
     # Check if an apt-get update is required
-    utils.run_subprocess(["zypper", "update", "-y"])
+    #utils.run_subprocess(["zypper", "update", "-y"])
     env = os.environ.copy()
     # Stop apt from asking questions!
     utils.run_subprocess(["zypper", "install", "-y"] + packages, env=env)
