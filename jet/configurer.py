@@ -49,7 +49,7 @@ default = {
         "password": "",
     },
     "user_environment": {
-        "default_app": "classic",
+        "default_app": "jupyterlab",
     },
     "services": {
         "cull": {

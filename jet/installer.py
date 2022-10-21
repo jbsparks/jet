@@ -25,7 +25,9 @@ from jet import (
     systemd,
     traefik,
     user,
+    utils,
 )
+
 from .config import (
     CONFIG_DIR,
     CONFIG_FILE,
@@ -147,6 +149,11 @@ def ensure_jupyterhub_package(prefix):
         ],
         upgrade=True,
     )
+    # install any/all kernels 
+    logger.info("Loading kernels")
+    logger.info("Loading ... bash_kernel")
+    utils.run_subprocess(["python3", "-m", "pip", "install", "bash_kernel"])
+    utils.run_subprocess(["python3", "-m", "bash_kernel.install"])
     traefik.ensure_traefik_binary(prefix)
 
 
